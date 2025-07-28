@@ -1,0 +1,16 @@
+<odoo>
+    <menuitem
+            id="real_estate_root_menu"
+            name="Real Estate"
+    />
+
+    <menuitem
+            id="properties_menu"
+            name="Properties"
+            parent="real_estate_root_menu"
+    />
+
+    <menuitem id="menu_penalty_root" name="Penalty"/>
+    <menuitem id="menu_penalty_main" name="Penalties" parent="menu_penalty_root"/>
+    <menuitem id="menu_penalty_action" name="Manage Penalties" parent="menu_penalty_main" action="app_one.penalty_action"/>
+</odoo>

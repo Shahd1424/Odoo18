@@ -1,0 +1,68 @@
+<odoo>
+  <record id="penalty_record_tree" model="ir.ui.view">
+    <field name="name">penalty.penalty.list</field>
+    <field name="model">penalty.penalty</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="employee_id"/>
+        <field name="date"/>
+        <field name="amount"/>
+<!--        <field name="states"/>-->
+      </list>
+    </field>
+  </record>
+
+  <record id="penalty_record_form" model="ir.ui.view">
+    <field name="name">penalty.penalty.form</field>
+    <field name="model">penalty.penalty</field>
+    <field name="arch" type="xml">
+      <form string="Penalty">
+        <header>
+          <button name="set_to_draft" type="object" string="Set to Draft"
+                  invisible="state != 'draft'"
+                  class="btn-secondary" />
+          <button name="action_confirm" type="object" string="Confirm"
+                  invisible="state != 'confirm'"
+                  class="btn-primary" />
+          <button name="action_done" type="object" string="Done"
+                  invisible="state != 'done'"
+                  class="btn-success"/>
+                  invisible="state != 'state'"
+          <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+        </header>
+
+        <group>
+          <group>
+            <field name="employee_id"/>
+            <field name="amount"/>
+            <field name="interval"/>
+          </group>
+          <group>
+            <field name="date"/>
+            <field name="duration"/>
+            <field name="contract_id"/>
+          </group>
+        </group>
+
+        <notebook>
+          <page string="Penalty Lines">
+            <field name="lines">
+              <list editable="bottom">
+                <field name="date"/>
+                <field name="amount"/>
+              </list>
+            </field>
+          </page>
+        </notebook>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_penalty_record" model="ir.actions.act_window">
+    <field name="name">Penalty Records</field>
+    <field name="res_model">penalty.penalty</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+
+</odoo>
