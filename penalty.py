@@ -120,12 +120,12 @@ class Penalty(models.Model):
             workbook = xlsxwriter.Workbook(output, {'in_memory': True})
             sheet = workbook.add_worksheet('Penalty Report')
 
-            # Header
+
+            
             headers = ['Employee', 'Date', 'Amount', 'Duration', 'Interval', 'Total Amount', 'Contract']
             for col, header in enumerate(headers):
                 sheet.write(0, col, header)
 
-            # Record Data
             sheet.write(1, 0, rec.employee_id.name or '')
             sheet.write(1, 1, str(rec.date) or '')
             sheet.write(1, 2, rec.amount)
@@ -134,7 +134,6 @@ class Penalty(models.Model):
             sheet.write(1, 5, rec.total_amount)
             sheet.write(1, 6, rec.contract_id.name or '')
 
-            # Penalty lines
             sheet.write(3, 0, "Penalty Lines:")
             sheet.write(4, 0, "Date")
             sheet.write(4, 1, "Amount")
@@ -148,7 +147,6 @@ class Penalty(models.Model):
             request.env.cr.commit()
             request.env.cr.commit()
 
-            # Create attachment
             attachment = self.env['ir.attachment'].create({
                 'name': 'penalty_report.xlsx',
                 'type': 'binary',
